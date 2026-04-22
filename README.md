@@ -200,25 +200,3 @@ is not empty and shows rendered records.
   dashboard panel render within ~15s; the pipeline routing within ~60s.
   These are Playwright test timeouts, not hard sleeps, so the tests pass as
   soon as the condition is met.
-
-## Known limitations
-
-- OpenObserve's UI evolves quickly. The POMs deliberately use role- and
-  label-based locators where possible, but a handful of selectors reach
-  into Quasar/Vue Flow internals (`.q-dialog`, `.vue-flow__handle-source`)
-  because no stable test id exists. Expect to update these if the app
-  version drifts significantly.
-- Module 2 alert creation currently uses the Alerts Import UI path. That path
-  requires at least one existing alert row so the test can export a seed JSON
-  before importing the rewritten alert.
-- The pipeline spec relies on Playwright's `dragTo` between DOM handles.
-  Vue Flow sometimes needs `mousemove` nudges mid-drag; if your local
-  version doesn't accept a single `dragTo`, swap in a manual
-  `mouse.down → mouse.move → mouse.up` sequence inside `PipelinesPage`.
-- Stream deletion via `/api/{org}/streams/{stream}` is used best-effort
-  for cleanup. If the endpoint differs on your build, residue will remain
-  in the `default` org — harmless, but worth knowing.
-- Tests are serial by default (`fullyParallel: false`) because alert and
-  pipeline flows touch org-level state (templates, destinations, alerts,
-  pipeline list). Making them safely parallel would require namespacing
-  artefacts per worker.
