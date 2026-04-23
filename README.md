@@ -93,6 +93,7 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 pytest
 ```
+Pytest also generates a self-contained HTML report at `pytest/reports/pytest-report.html`.
 
 ### Modules 2–4 — Playwright
 
