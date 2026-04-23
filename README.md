@@ -188,15 +188,3 @@ is not empty and shows rendered records.
   tests use the API directly. This keeps the UI test focused on the
   thing it's actually validating (the UI flow) while still asserting on
   real backend state.
-
-## Assumptions
-
-- OpenObserve is a fresh local instance using the assignment-default
-  credentials and the `default` organization.
-- Tests target a recent OpenObserve UI (Quasar-based, Vue Flow for the
-  pipeline canvas). Some labels/selectors in the POMs may need to shift
-  if the UI is rebranded — they are localised to the POM file, by design.
-- The alert → destination → search round-trip completes within ~90s; the
-  dashboard panel render within ~15s; the pipeline routing within ~60s.
-  These are Playwright test timeouts, not hard sleeps, so the tests pass as
-  soon as the condition is met.
